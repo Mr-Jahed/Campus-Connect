@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Timetable
+{% endblock %}
+
+{% block content %}
+
+ <div class="content container-fluid">
+          <div class="page-header">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="page-title">Add Timetable</h3>
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="subjects.html">Timetable</a>
+                  </li>
+                  <li class="breadcrumb-item active">Add Timetable</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+            {% include 'Includes/messages.html' %}
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <form method="post" action="{% url 'add_timetable' %}">
+                      {% csrf_token %}
+                    <div class="row">
+                      <div class="col-12">
+                        <h5 class="form-title">
+                          <span>Timetable Information</span>
+                        </h5>
+                      </div>
+
+<!--                      <div class="col-12 col-sm-6">-->
+<!--                        <div class="form-group">-->
+<!--                          <label>Course</label>-->
+<!--                          <input type="text" class="form-control" name="course_name" value="{{timetable.course}}" readonly/>-->
+<!--                          <input type="text" class="form-control" name="tt_id" value="{{timetable.id}}" hidden/>-->
+<!--                        </div>-->
+<!--                      </div>-->
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Course</h6>
+                              <select class="form-control col-sm-3" name="course_id" required>
+                                  <option>Select Course</option>
+                                  {% for i in course %}
+                                  <option value="{{i.id}}">{{i.name}}</option>                    //To Access Courses Dynamically
+                                  {% endfor %}
+                              </select>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Session Year</h6>
+                          <select class="form-control col-sm-3" name="session_year_id" required>
+                                  <option>Select Session Year</option>
+                                  {% for i in session_year %}
+                                  <option value="{{i.id}}">{{i.session_start}} - {{i.session_end}}</option>       //To Access Session Year Dynamically
+                                  {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Lecture Number</h6>
+<!--                          <input type="text" class="form-control col-sm-3" name="lecture_number1" required/>-->
+                          <select class="form-control col-sm-3" name="lecture_number" required>
+                                  <option>Select Lecture Number</option>
+                                  {% for i in lec_no %}
+                                  <option value="{{i}}">{{i}}</option>       //To Access Lecture Number Dynamically
+                                  {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Time Slot</h6>
+<!--                          <input type="text" class="form-control col-sm-3" name="time_slot1" required/>-->
+                          <select class="form-control col-sm-3" name="time_slot1" required>
+                                  <option>Select Time Slot</option>
+                                  {% for i in time_slots %}
+                                  <option value="{{i}}">{{i}}</option>       //To Access Time Slot Dynamically
+                                  {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group d-flex align-items-center">
+                              <h6 class="mr-3 col-sm-2">Monday</h6>
+                              <input type="text" class="form-control col-sm-3" name="monday1" required/>
+                          </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Tuesday</h6>
+                          <input type="text" class="form-control col-sm-3" name="tuesday1" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Wednesday</h6>
+                          <input type="text" class="form-control col-sm-3" name="wednesday1" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Thursday</h6>
+                          <input type="text" class="form-control col-sm-3" name="thursday1" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Friday</h6>
+                          <input type="text" class="form-control col-sm-3" name="friday1" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Saturday</h6>
+                          <input type="text" class="form-control col-sm-3" name="saturday1" required/>
+                        </div>
+                      </div>
+
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                          Add Timetable
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+{% endblock %}

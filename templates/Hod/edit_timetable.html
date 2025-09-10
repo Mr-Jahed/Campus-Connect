@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Timetable
+{% endblock %}
+
+{% block content %}
+
+ <div class="content container-fluid">
+          <div class="page-header">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="page-title">Edit Timetable</h3>
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="subjects.html">Subject</a>
+                  </li>
+                  <li class="breadcrumb-item active">Edit Timetable</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+            {% include 'Includes/messages.html' %}
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <form method="post" action="{% url 'update_timetable' %}">
+                      {% csrf_token %}
+                    <div class="row">
+                      <div class="col-12">
+                        <h5 class="form-title">
+                          <span>Timetable Information</span>
+                        </h5>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label>Course</label>
+                          <input type="text" class="form-control" name="course_name" value="{{timetable.course}}" readonly/>
+                          <input type="text" class="form-control" name="tt_id" value="{{timetable.id}}" hidden/>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label>Session Year</label>
+                          <input type="text" class="form-control" name="session_year1" value="{{timetable.session_year}}" readonly/>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label>Lecture Number</label>
+                          <input type="text" class="form-control" name="lecture_number1" value="{{timetable.lecture_number}}" readonly/>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label>Time Slot</label>
+                          <input type="text" class="form-control" name="time_slot1" value="{{timetable.time_slot}}" readonly/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                          <div class="form-group d-flex align-items-center">
+                              <h6 class="mr-3 col-sm-2">Monday</h6>
+                              <input type="text" class="form-control col-sm-3" name="monday1" value="{{timetable.monday}}" required/>
+                          </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Tuesday</h6>
+                          <input type="text" class="form-control col-sm-3" name="tuesday1" value="{{timetable.tuesday}}" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Wednesday</h6>
+                          <input type="text" class="form-control col-sm-3" name="wednesday1" value="{{timetable.wednesday}}" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Thursday</h6>
+                          <input type="text" class="form-control col-sm-3" name="thursday1" value="{{timetable.thursday}}" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Friday</h6>
+                          <input type="text" class="form-control col-sm-3" name="friday1" value="{{timetable.friday}}" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group d-flex align-items-center">
+                          <h6 class="mr-3 col-sm-2">Saturday</h6>
+                          <input type="text" class="form-control col-sm-3" name="saturday1" value="{{timetable.saturday}}" required/>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                          Update Timetable
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+{% endblock %}

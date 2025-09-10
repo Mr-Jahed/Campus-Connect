@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Auditorium
+{% endblock %}
+
+{% block content %}
+<div class="content container-fluid">
+ <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Apply For Auditorium</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                           <li class="breadcrumb-item active">Apply For Auditorium</li>
+                        </ul>
+                     </div>
+                     <div class="col-auto text-right float-right ml-auto">
+                        <button class="btn btn-primary mr-2" data-toggle="modal" data-target=".bd-example-modal-lg" type="button"><i class="fas fa-pray"></i>&nbsp; Booking History</button>
+                     </div>
+                  </div>
+               </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <form method="POST" action="{% url 'staff_book_auditorium_save' %}">
+                      {% csrf_token %}                                              <!-- For Security Purpose-->
+                      <div class="col-12">
+                        <h5 class="form-title">
+                          <span>Apply For Auditorium</span>
+                        </h5>
+
+                          {% include 'Includes/messages.html' %}
+
+                      </div>
+                      <div class="row col-12">
+                          <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                              <label>Start Date</label>
+                              <input type="date" class="form-control" name="start_date" required/>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                              <label>End Date</label>
+                              <input type="date" class="form-control" name="end_date" required/>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <label>Auditorium Booking Purpose</label>
+                            <textarea class="form-control" name="purpose" style="height:250px" required></textarea>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                          Apply For Auditorium
+                        </button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+<!-- Large modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="model-header">
+          <h5 class="model-title mt-4 ml-4" id="exampleModelLabel">Booking History</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table id="table_id" class="table table-hover table-center mb-0">
+                                 <thead>
+                                    <tr>
+                                       <th>Start Date</th>
+                                       <th>End Date</th>
+                                       <th>Purpose</th>
+                                       <th class="text-right">Status</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 {% for i in auditorium_booking_history %}
+                                    <tr>
+                                       <td>{{i.start_date}}</td>                <!--id == pk(product key) we can use both-->
+                                       <td>{{i.end_date}}</td>
+                                       <td>{{i.purpose}}</td>
+                                       <td class="text-right">
+                                          <div class="actions">
+                                             {% if i.status == 0 %}
+                                             <span class="badge badge-info">Request Is Pending</span>
+                                             {% elif i.status == 1 %}
+                                             <span class="badge badge-success">Accepted</span>
+                                             {% else %}
+                                             <span class="badge badge-danger">Rejected</span>
+                                             {% endif %}
+                                          </div>
+                                       </td>
+                                    </tr>
+                                 {% endfor %}
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
